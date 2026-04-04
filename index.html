@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brochure Feedback — The Care Ranch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sand:      #F7F4F0;
+      --cream:     #F2EDE4;
+      --terracotta:#C47D5C;
+      --sage:      #6A9A7C;
+      --saddle:    #79584A;
+      --rust:      #A15B4A;
+      --slate:     #525A5C;
+      --charcoal:  #3D3632;
+      --border:    rgba(121, 88, 74, 0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lora', serif;
+      background-color: var(--sand);
+      color: var(--charcoal);
+      font-size: 17px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Header ── */
+    header {
+      background-color: var(--charcoal);
+      color: var(--cream);
+      padding: 64px 32px 56px;
+      text-align: center;
+    }
+
+    .wordmark {
+      font-family: 'Playfair Display', serif;
+      font-size: 11px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 28px;
+      opacity: 0.9;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.2;
+      color: var(--cream);
+      margin-bottom: 16px;
+    }
+
+    header h1 em {
+      font-style: italic;
+      color: rgba(242, 237, 228, 0.7);
+    }
+
+    .header-meta {
+      font-family: 'Lora', serif;
+      font-size: 13px;
+      letter-spacing: 0.15em;
+      color: rgba(242, 237, 228, 0.45);
+      text-transform: uppercase;
+      margin-top: 20px;
+    }
+
+    .header-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 36px;
+      opacity: 0.3;
+    }
+    .header-divider span { display: block; height: 1px; width: 40px; background: var(--cream); }
+    .header-divider i { display: block; width: 4px; height: 4px; border-radius: 50%; background: var(--terracotta); }
+
+    /* ── Intro note ── */
+    .intro-wrap {
+      max-width: 720px;
+      margin: 64px auto 0;
+      padding: 0 32px;
+    }
+
+    .intro-note {
+      background-color: var(--cream);
+      border-left: 3px solid var(--terracotta);
+      padding: 28px 32px;
+      border-radius: 2px;
+    }
+
+    .intro-note p {
+      font-size: 16px;
+      color: var(--slate);
+      line-height: 1.8;
+    }
+
+    /* ── Main content ── */
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 56px 32px 96px;
+    }
+
+    /* ── Section ── */
+    .section {
+      margin-bottom: 72px;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .section-number {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 13px;
+      color: var(--terracotta);
+      min-width: 20px;
+    }
+
+    .section-label h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: 1.6rem;
+      color: var(--charcoal);
+      letter-spacing: -0.01em;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── Issue item ── */
+    .issue {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .issue:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    .issue-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+      font-size: 1.05rem;
+      color: var(--saddle);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    .issue p {
+      font-size: 16px;
+      color: var(--slate);
+      line-height: 1.8;
+    }
+
+    .issue p + p {
+      margin-top: 12px;
+    }
+
+    /* ── Blockquote (example text) ── */
+    blockquote {
+      margin: 16px 0;
+      padding: 14px 20px;
+      background-color: var(--cream);
+      border-left: 2px solid rgba(196, 125, 92, 0.4);
+      border-radius: 0 2px 2px 0;
+    }
+
+    blockquote p {
+      font-size: 15px !important;
+      font-style: italic;
+      color: var(--charcoal) !important;
+      opacity: 0.75;
+    }
+
+    /* ── Inline code (specific word highlights) ── */
+    code {
+      font-family: inherit;
+      background: rgba(196, 125, 92, 0.1);
+      color: var(--rust);
+      padding: 1px 6px;
+      border-radius: 2px;
+      font-size: 0.95em;
+    }
+
+    /* ── Alert / warning item ── */
+    .issue.alert .issue-title {
+      color: var(--rust);
+    }
+
+    .issue.alert {
+      background: rgba(161, 91, 74, 0.04);
+      padding: 20px 24px;
+      border-radius: 4px;
+      border-left: 3px solid var(--rust);
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    /* ── Translation note style ── */
+    .translation-tag {
+      display: inline-block;
+      font-family: 'Lora', serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sage);
+      background: rgba(106, 154, 124, 0.1);
+      padding: 2px 8px;
+      border-radius: 2px;
+      margin-bottom: 10px;
+    }
+
+    /* ── Closing ── */
+    footer {
+      text-align: center;
+      padding: 48px 32px;
+      border-top: 1px solid var(--border);
+    }
+
+    .closing-quote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: rgba(61, 54, 50, 0.45);
+      max-width: 520px;
+      margin: 0 auto 24px;
+      line-height: 1.6;
+    }
+
+    .footer-meta {
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(61, 54, 50, 0.3);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      header { padding: 48px 24px 40px; }
+      main, .intro-wrap { padding-left: 20px; padding-right: 20px; }
+      .intro-note { padding: 20px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <p class="wordmark">The Care Ranch</p>
+    <h1>Brochure Feedback<br><em>Version 7</em></h1>
+    <p class="header-meta">April 2026</p>
+    <div class="header-divider">
+      <span></span><i></i><span></span>
+    </div>
+  </header>
+
+  <div class="intro-wrap">
+    <div class="intro-note">
+      <p>These notes cover structure, tone, language and specific wording. Nothing has been rewritten — all points are observations and suggestions for consideration before the final version goes to print.</p>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- Dutch note -->
+    <div class="section">
+      <div class="section-label">
+        <span class="section-number">—</span>
+        <h2>A note on language</h2>
+      </div>
+      <div class="issue">
+        <p>The brochure reads as though it was written with Dutch as the underlying language of thought, then composed or translated into English. This is entirely natural and the result is largely strong — the voice comes through clearly. A few phrases carry Dutch sentence structures or word choices that don't quite land the same way in English. These are flagged below, not as errors, but as places worth a quick pass by a native English speaker before the final version goes out.</p>
+      </div>
+    </div>
+
+    <!-- Section 1 -->
+    <div class="section">
+      <div class="section-label">
+        <span class="section-number">1</span>
+        <h2>Structure &amp; Flow</h2>
+      </div>
+
+      <div class="issue">
+        <p class="issue-title">The "For Who" section appears too late</p>
+        <p>Currently it sits after the Method, Experience, Journey <em>and</em> the benefits list. Most readers will self-select — or drop off — before they reach it. Consider moving it earlier, ideally before or right after the Method, so the right people recognise themselves quickly and stay engaged.</p>
+      </div>
+
+      <div class="issue">
+        <p class="issue-title">Team section placement</p>
+        <p>The team bios appear after Practical Information, which makes them feel like an appendix. People and credibility are a major trust signal for a high-investment experience like this. The team would land with more weight earlier — perhaps before or just after the Method section.</p>
+      </div>
+
+      <div class="issue">
+        <p class="issue-title">The organisational section is awkwardly sandwiched</p>
+        <p>"Why this matters for organizations" sits between the personal benefits list and the social mission section. It addresses a different buyer (HR / L&D) and interrupts the personal narrative. Options: move it to a clearly separated page, or give it its own visually distinct spread so the two audiences don't feel mixed.</p>
+      </div>
+
+      <div class="issue">
+        <p class="issue-title">The non-profit section transition feels abrupt</p>
+        <p>The shift from "sustainable personal change" to "we operate as a hybrid model" is quite sudden. The idea is powerful and worth keeping — it just needs a short bridge sentence connecting the personal journey to the broader mission so the reader is carried across rather than surprised.</p>
+      </div>
+    </div>
+
+    <!-- Section 2 -->
+    <div class="section">
+      <div class="section-label">
+        <span class="section-number">2</span>
+        <h2>Tone &amp; Register</h2>
+      </div>
+
+      <div class="issue">
+        <p class="issue-title">Two voices competing</p>
+        <p>The opening sections use poetic, sensory language that is genuinely strong:</p>
+        <blockquote><p>"The land is open. The rhythm is slow. The silence is your peace."</p></blockquote>
+        <p>Later sections shift into a more corporate register:</p>
+        <blockquote><p>"From an HR and organizational perspective, this leadership experience supports: Preventive leadership care / Reduced burnout risk / Improved leadership presence and trust..."</p></blockquote>
+        <p>These two registers work against each other. The bullet-list HR framing risks undercutting the premium, experiential tone built up at the start. The same information can likely be carried in the brochure's own voice.</p>
+      </div>
+
+      <div class="issue">
+        <p class="issue-title">Inconsistent point of view</p>
+        <p>The brochure alternates between first-person (<em>"We develop leadership by..."</em>) and third-person (<em>"The Care Ranch is for..."</em>) without a clear pattern. Picking one and applying it consistently would make the document feel more intentional and coherent.</p>
+      </div>
+
+      <div class="issue">
+        <p class="issue-title">Team bios vary in tone and depth</p>
+        <p>Scott's bio reads as academic and third-person. Lotte's is detailed and reflective, written in first person. Margreet's is brief by comparison — which feels slightly at odds with her role as Founder. A shared format and comparable depth across all three would strengthen the team section significantly.</p>
+      </div>
+    </div>
+
+    <!-- Section 3 -->
+    <div class="section">
+      <div class="section-label">
+        <span class="section-number">3</span>
+        <h2>Language — Translation Notes</h2>
+      </div>
+
+      <div class="issue">
+        <span class="translation-tag">Dutch → English</span>
+        <p class="issue-title">"FOR WHO" → "FOR WHOM"</p>
+        <p>In Dutch, <em>Voor wie</em> is the natural and correct phrase. In English, the standard form is <em>For Whom</em>. This is a small distinction but it will stand out to educated readers and is easy to correct.</p>
+      </div>
+
+      <div class="issue">
+        <span class="translation-tag">Dutch → English</span>
+        <p class="issue-title">"Nothing is excessive or distracts from the transformative journey"</p>
+        <p>The English parallel structure requires an adjective rather than a verb here: <em>"Nothing is excessive or <strong>distracting</strong>."</em> The current phrasing is a common Dutch-to-English translation pattern.</p>
+      </div>
+
+      <div class="issue">
+        <span class="translation-tag">Dutch → English</span>
+        <p class="issue-title">"A personal leadership experience"</p>
+        <p>In Dutch, <em>persoonlijk</em> carries a broader meaning — individual attention, tailored, intimate. In English, <em>personal</em> more strongly implies <em>solo</em>. Since the programme involves 8–12 participants and the brochure notes that "the group creates reflection and perspective," the word may need adjusting. <em>Individual</em> or <em>immersive</em> might be more precise in English.</p>
+      </div>
+
+      <div class="issue">
+        <span class="translation-tag">Dutch → English</span>
+        <p class="issue-title">"Curious leaders and individuals who sense:"</p>
+        <p>The word <em>curious</em> here likely reflects the Dutch <em>nieuwsgierig</em> or <em>onderzoekend</em> — open, enquiring. In English it reads as a slightly weak qualifier for a senior executive audience. The brochure already uses much more direct language elsewhere (<em>"leaders who sense that something is out of alignment"</em>) which lands better.</p>
+      </div>
+
+    </div>
+
+    <!-- Section 4 -->
+    <div class="section">
+      <div class="section-label">
+        <span class="section-number">4</span>
+        <h2>Specific Wording</h2>
+      </div>
+
+      <div class="issue">
+        <p class="issue-title">EMDR paragraph reads as a disclaimer</p>
+        <blockquote><p>"Where relevant, EMDR may be used as an optional support to help shift deeply rooted patterns... without taking a therapeutic focus."</p></blockquote>
+        <p>This reads as liability copy rather than brochure copy. If EMDR is part of the offer, it can be presented with the same confidence as the other modalities. If a caveat is genuinely needed, it may be better placed in pre-intake communication rather than in the brochure itself.</p>
+      </div>
+
+      <div class="issue">
+        <p class="issue-title">Theory U reference</p>
+        <blockquote><p>"The work follows the logic of Theory U"</p></blockquote>
+        <p>This is a niche academic reference (Otto Scharmer / MIT) that most C-suite readers will not recognise. The brochure already communicates the same idea in its own language, and the citation is not needed to validate the method. Consider a brief explanation or removing the reference entirely.</p>
+      </div>
+
+      <div class="issue">
+        <p class="issue-title">EBAS acronym placement</p>
+        <p>The technical acronym <em>EBAS (Elemental Body Alignment System)</em> reads clinical in an otherwise experiential document. Introducing it through Scott's bio — where it belongs to him personally — might feel more natural than leading with the acronym in the method overview.</p>
+      </div>
+
+      <div class="issue">
+        <p class="issue-title">Call to action: "Inquire"</p>
+        <p>The word <em>Inquire</em> as a closing CTA is passive and understated for the brand. Alternatives to consider: <em>Apply</em>, <em>Begin your journey</em>, or <em>Connect with us</em> — something that matches the invitation-led positioning already established in the rest of the document.</p>
+      </div>
+
+      <div class="issue">
+        <p class="issue-title">Missing space before dash</p>
+        <p><em>"innovative leadership requires new skills- the ability to restore..."</em> — there is a missing space before the dash. Minor typographic detail, but worth correcting for a premium print piece.</p>
+      </div>
+    </div>
+
+    <!-- Section 5 — Alert -->
+    <div class="section">
+      <div class="section-label">
+        <span class="section-number">5</span>
+        <h2>To Remove Before Printing</h2>
+      </div>
+
+      <div class="issue alert">
+        <p class="issue-title">Internal formatting note is still visible in the document</p>
+        <p>At the very end of the brochure, the following appears as readable text:</p>
+        <blockquote><p>(Annelinde: in lettertype capslock the care ranch lettertype)</p></blockquote>
+        <p>This is a design instruction that was not removed before the document was shared. It must be deleted before any version goes to the printer or is sent externally.</p>
+      </div>
+    </div>
+
+    <!-- Section 6 -->
+    <div class="section">
+      <div class="section-label">
+        <span class="section-number">6</span>
+        <h2>Minor Observations</h2>
+      </div>
+
+      <div class="issue">
+        <p class="issue-title">No testimonials or social proof</p>
+        <p>The brochure currently contains no quotes from past participants. Even a single brief testimonial would significantly strengthen credibility for a first-time reader considering a high-investment application.</p>
+      </div>
+
+      <div class="issue">
+        <p class="issue-title">Closing quote placement</p>
+        <p>The closing line — <em>"A place where heritage is honoured, simplicity restores the nervous system, and leadership returns to congruence"</em> — is strong and evocative. Currently it appears after the CTA, which slightly weakens its effect. Consider placing it before "Begin your Journey" so the reader is moved before being invited to act.</p>
+      </div>
+
+      <div class="issue">
+        <p class="issue-title">Pricing approach</p>
+        <p>Directing pricing to the website is a well-suited choice for this positioning. The <em>"participation is limited and by application only"</em> framing is particularly effective at signalling exclusivity without stating a number.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p class="closing-quote">"The center is felt, not explained."</p>
+    <p class="footer-meta">Brochure Feedback &nbsp;·&nbsp; Version 7 &nbsp;·&nbsp; April 2026</p>
+  </footer>
+
+</body>
+</html>
