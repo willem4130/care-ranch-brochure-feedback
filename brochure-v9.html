@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Care Ranch — Brochure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sand:       #F7F4F0;
+      --cream:      #F2EDE4;
+      --stone:      #F5F5F3;
+      --terracotta: #C47D5C;
+      --sage:       #6A9A7C;
+      --saddle:     #79584A;
+      --charcoal:   #3D3632;
+      --border:     rgba(121, 88, 74, 0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lora', serif;
+      background-color: var(--sand);
+      color: var(--charcoal);
+      font-size: clamp(1.0625rem, 0.95rem + 0.4vw, 1.125rem);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      letter-spacing: 0.01em;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background-color: var(--charcoal);
+      color: var(--cream);
+      padding: clamp(5rem, 12vw, 8rem) 32px clamp(4rem, 10vw, 7rem);
+      text-align: center;
+    }
+
+    .hero-wordmark {
+      font-family: 'Lora', serif;
+      font-size: 11px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 32px;
+      opacity: 0.9;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 300;
+      font-size: clamp(2.6rem, 7vw, 4.2rem);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cream);
+      margin-bottom: 28px;
+      line-height: 1.1;
+    }
+
+    .hero .tagline {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 2.5vw, 1.15rem);
+      color: rgba(242, 237, 228, 0.65);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.75;
+    }
+
+    .hero-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: clamp(2.5rem, 6vw, 4rem);
+      opacity: 0.3;
+    }
+    .hero-divider span { display: block; height: 1px; width: 48px; background: var(--cream); }
+    .hero-divider i { display: block; width: 5px; height: 5px; border-radius: 50%; background: var(--terracotta); }
+
+    /* ── Layout containers — varied widths per content type ── */
+    .content-narrow {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .content {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .content-wide {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* ── Sections ── */
+    section {
+      padding: clamp(3.5rem, 8vw, 5.5rem) 0;
+    }
+
+    /* ── Gradient divider between sections ── */
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* ── Kicker / eyebrow labels ── */
+    .kicker {
+      font-family: 'Lora', serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    /* ── Section headings ── */
+    section h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: clamp(1.7rem, 4.5vw, 2.2rem);
+      color: var(--charcoal);
+      margin-bottom: clamp(1.5rem, 4vw, 2rem);
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+    }
+
+    section h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+      font-size: 1.15rem;
+      color: var(--saddle);
+      margin-top: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    section h3:first-of-type {
+      margin-top: 0;
+    }
+
+    section p {
+      margin-bottom: 16px;
+      color: var(--charcoal);
+    }
+
+    section p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ── Drop cap ── */
+    .drop-cap::first-letter {
+      font-family: 'Playfair Display', serif;
+      float: left;
+      font-size: 3.4em;
+      line-height: 0.8;
+      margin-right: 0.08em;
+      padding-top: 0.08em;
+      color: var(--terracotta);
+    }
+
+    /* ── Poetic / emphasis lines ── */
+    .poetic {
+      font-style: italic;
+      color: rgba(61, 54, 50, 0.65);
+    }
+
+    .emphasis {
+      font-weight: 500;
+    }
+
+    /* ── Pull quote (decorative) ── */
+    .pull-quote {
+      position: relative;
+      text-align: center;
+      padding: clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 4vw, 3rem);
+      margin: clamp(1.5rem, 4vw, 2.5rem) 0;
+    }
+
+    .pull-quote::before,
+    .pull-quote::after {
+      font-family: 'Playfair Display', serif;
+      position: absolute;
+      font-size: 4em;
+      color: var(--terracotta);
+      opacity: 0.15;
+      line-height: 1;
+    }
+
+    .pull-quote::before {
+      content: '\201C';
+      top: 0;
+      left: 0;
+    }
+
+    .pull-quote::after {
+      content: '\201D';
+      bottom: -0.2em;
+      right: 0;
+    }
+
+    .pull-quote p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1.15rem, 3vw, 1.35rem);
+      color: rgba(61, 54, 50, 0.55);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ── Inline pull quote (within section flow) ── */
+    .inline-quote {
+      position: relative;
+      padding: clamp(1.5rem, 4vw, 2.5rem) 0;
+      margin: clamp(0.5rem, 2vw, 1rem) 0;
+      text-align: center;
+    }
+
+    .inline-quote p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1.05rem, 2.8vw, 1.2rem);
+      color: rgba(61, 54, 50, 0.55);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* ── Shift block (from → to) ── */
+    .shift-block {
+      margin: clamp(1.2rem, 3vw, 1.8rem) 0;
+      padding: clamp(1.2rem, 3vw, 1.8rem) clamp(1.5rem, 4vw, 2rem);
+      background: var(--cream);
+      border-left: 3px solid var(--terracotta);
+      border-radius: 0 3px 3px 0;
+      font-style: italic;
+      color: rgba(61, 54, 50, 0.75);
+      line-height: 2.1;
+    }
+
+    /* ── Method component ── */
+    .method-item {
+      margin-bottom: clamp(1.2rem, 3vw, 1.8rem);
+      padding-left: 20px;
+      border-left: 2px solid rgba(196, 125, 92, 0.25);
+    }
+
+    .method-item strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+      font-size: 1.05rem;
+      color: var(--saddle);
+      margin-bottom: 4px;
+    }
+
+    .method-item p {
+      margin-bottom: 0;
+      font-size: 0.95em;
+      color: rgba(61, 54, 50, 0.85);
+    }
+
+    /* ── Benefit item ── */
+    .benefit {
+      margin-bottom: clamp(1.2rem, 3vw, 1.8rem);
+      padding-bottom: clamp(1.2rem, 3vw, 1.8rem);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .benefit:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    .benefit strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+      font-size: 1.05rem;
+      color: var(--charcoal);
+      margin-bottom: 4px;
+    }
+
+    .benefit p {
+      margin-bottom: 0;
+      font-size: 0.95em;
+      color: rgba(61, 54, 50, 0.75);
+    }
+
+    /* ── List items ── */
+    .soft-list {
+      margin: 14px 0 18px;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .soft-list li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 8px;
+      color: rgba(61, 54, 50, 0.8);
+    }
+
+    .soft-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 11px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--terracotta);
+      opacity: 0.45;
+    }
+
+    /* ── Statement list (For Who section — larger, left-bordered) ── */
+    .statement-list {
+      margin: 20px 0 24px;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .statement-list li {
+      padding: 8px 0 8px 20px;
+      border-left: 2px solid rgba(196, 125, 92, 0.3);
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1rem, 2.5vw, 1.08rem);
+      color: rgba(61, 54, 50, 0.78);
+      line-height: 1.5;
+      margin-bottom: 4px;
+    }
+
+    /* ── Team bios ── */
+    .bio {
+      margin-bottom: clamp(2.5rem, 6vw, 3.5rem);
+      padding-bottom: clamp(2.5rem, 6vw, 3.5rem);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .bio:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .bio h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: var(--charcoal);
+      margin-bottom: 4px;
+    }
+
+    .bio .role {
+      font-family: 'Lora', serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 18px;
+      display: block;
+    }
+
+    /* ── Full-bleed sections ── */
+    .full-bleed {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      margin-left: -50vw;
+    }
+
+    .full-bleed-cream {
+      background-color: var(--cream);
+    }
+
+    .full-bleed-white {
+      background-color: #ffffff;
+    }
+
+    .full-bleed-charcoal {
+      background-color: var(--charcoal);
+      color: var(--cream);
+    }
+
+    .full-bleed-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: clamp(3.5rem, 8vw, 5.5rem) 32px;
+    }
+
+    .full-bleed-inner-wide {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: clamp(3.5rem, 8vw, 5.5rem) 32px;
+    }
+
+    /* ── Org section styling ── */
+    .org-section h2 {
+      font-size: clamp(1.4rem, 3.5vw, 1.75rem);
+    }
+
+    .org-section .emphasis {
+      color: rgba(61, 54, 50, 0.7);
+    }
+
+    /* ── Practical info ── */
+    .info-grid {
+      display: grid;
+      gap: clamp(1.2rem, 3vw, 1.8rem);
+    }
+
+    .info-item strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+      color: var(--saddle);
+      margin-bottom: 2px;
+    }
+
+    /* ── CTA ── */
+    .cta {
+      text-align: center;
+      padding: clamp(1rem, 3vw, 1.5rem) 0 0;
+    }
+
+    .cta p {
+      margin-bottom: 12px;
+    }
+
+    .cta a {
+      display: inline-block;
+      font-family: 'Lora', serif;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      text-decoration: none;
+      border: 1px solid rgba(61, 54, 50, 0.25);
+      padding: 14px 36px;
+      transition: all 0.3s ease;
+    }
+
+    .cta a:hover {
+      background-color: var(--terracotta);
+      border-color: var(--terracotta);
+      color: #fff;
+    }
+
+    /* ── Mission closing ── */
+    .mission-close {
+      text-align: center;
+      padding: clamp(2rem, 5vw, 3rem) 0 0;
+    }
+
+    .mission-close .dot-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+    }
+    .mission-close .dot-divider span { height: 1px; width: 32px; background: rgba(61, 54, 50, 0.15); }
+    .mission-close .dot-divider i { width: 4px; height: 4px; border-radius: 50%; background: var(--terracotta); opacity: 0.5; }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: clamp(2.5rem, 6vw, 4rem) 32px;
+    }
+
+    .footer-gradient {
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(196, 125, 92, 0.2), transparent);
+      max-width: 400px;
+      margin: 0 auto clamp(1.5rem, 4vw, 2.5rem);
+    }
+
+    .footer-meta {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(61, 54, 50, 0.28);
+    }
+
+    /* ── Photos ── */
+    .section-photo {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: clamp(1.5rem, 4vw, 2.25rem) 0 clamp(2rem, 5vw, 2.75rem);
+    }
+
+    .inline-photo {
+      display: block;
+      width: 100%;
+      max-width: 520px;
+      height: auto;
+      margin: clamp(1.5rem, 4vw, 2rem) auto;
+    }
+
+    .photo-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(0.5rem, 1.5vw, 0.9rem);
+      margin: clamp(1.75rem, 4.5vw, 2.5rem) 0 clamp(2rem, 5vw, 2.75rem);
+    }
+
+    .photo-grid-3 img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .hero { padding: clamp(3.5rem, 10vw, 5rem) 24px; }
+      .content-narrow,
+      .content,
+      .content-wide { padding: 0 20px; }
+      .full-bleed-inner,
+      .full-bleed-inner-wide { padding-left: 20px; padding-right: 20px; }
+      .method-item { padding-left: 16px; }
+      .statement-list li { padding-left: 16px; }
+      .photo-grid-3 { grid-template-columns: 1fr; gap: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <div class="hero">
+    <p class="hero-wordmark">The Care Ranch</p>
+    <h1>The Care Ranch</h1>
+    <p class="tagline">An immersive leadership experience grounded in neuroscience and embodied intelligence &mdash; resulting in aligned leadership with clean vision, clarity of direction, and impactful outcomes.</p>
+    <div class="hero-divider">
+      <span></span><i></i><span></span>
+    </div>
+  </div>
+
+  <!-- The Care Ranch in Arizona (poetic — narrow) -->
+  <div class="content-narrow">
+    <section>
+      <span class="kicker">Network &middot; Arizona</span>
+      <h2>The Care Ranch in Arizona</h2>
+      <img class="section-photo" src="images/location-92.jpg" alt="The entrance to The Care Ranch at golden hour" />
+      <p>The Care Ranch is an international network of retreat locations. Its flagship sits in Arizona. Wageningen, in the Netherlands, opens next &mdash; with further locations to follow.</p>
+      <p class="drop-cap">Set in the high Sonoran Desert, the Arizona ranch collaborates with the historic Tubac Ranch &mdash; built in the 1800s &mdash; preserving its essence and partnership with nature.</p>
+      <p>The ranch is restored with care, respect, and restraint, honoring the landscape and its historic charm.</p>
+      <p>Nothing is excessive or distracting from the transformative journey.</p>
+
+      <div class="inline-quote">
+        <p>The land is open. The rhythm is slow. The silence is your peace.</p>
+      </div>
+
+      <p>Here, simplicity calms the nervous system while the absence of excess reduces cognitive load. This historic space slows perception and grounds the body. Nothing here is accidental.</p>
+      <p>Food is prepared with care, using whole seasonal ingredients that support the nervous system and reflect the rhythm of the land.</p>
+      <img class="inline-photo" src="images/retreat-108.png" alt="A chef preparing food in the ranch kitchen" />
+      <p>Nature is not a backdrop &mdash; it is an active force.</p>
+      <p>It regulates. It slows perception. It brings back what is essential.</p>
+      <p class="poetic">The desert does not add anything. It removes.</p>
+      <p>And in that space, vision becomes visible again.</p>
+    </section>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- Clean Vision (poetic — narrow) -->
+  <div class="content-narrow">
+    <section>
+      <span class="kicker">Vision</span>
+      <h2>This Is the Place for Clean Vision</h2>
+      <p class="poetic">There comes a point in leadership where more thinking no longer produces more clarity &mdash; where the system asks for something other than input.</p>
+      <p>The Care Ranch offers immersive leadership experiences designed for executives, senior leaders, and individuals who understand that clarity, resilience, and authority do not come from speed or control &mdash; but from being in alignment.</p>
+      <p>Leading well in complexity requires a different kind of skill &mdash; the ability to restore congruence in the nervous system, engage emotional resilience, and embody vision for sustainable, grounded, and trustworthy leadership.</p>
+
+      <div class="shift-block">
+        Clarity that comes from congruence, not effort.<br>
+        Calm that holds under pressure.<br>
+        Leadership embodied, not performed.
+      </div>
+    </section>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- Who This Is For -->
+  <div class="content">
+    <section>
+      <span class="kicker">For You</span>
+      <h2>Who This Is For</h2>
+      <p>This experience is for leaders and individuals who sense:</p>
+      <ul class="statement-list">
+        <li>that something in their leadership or life is ready for recalibration</li>
+        <li>that there is a deeper layer to how they decide and lead</li>
+        <li>that they are ready to evolve into a new phase of development</li>
+        <li>and who want to reconnect with direction, clarity, and themselves</li>
+      </ul>
+      <p>Whether the question is fully formed or still emerging, what participants share is a sense that something is ready to shift.</p>
+      <p>This brochure describes the experience designed for senior leaders. The Care Ranch also runs retreats for other audiences &mdash; including young adults through our non-profit branch &mdash; sharing the same method, adapted to the group.</p>
+    </section>
+  </div>
+
+  <!-- Method (full-bleed cream background) -->
+  <div class="content">
+    <div class="full-bleed full-bleed-cream">
+      <div class="full-bleed-inner">
+        <span class="kicker">Method</span>
+        <h2>The Care Ranch Method</h2>
+        <p>Grounded in neuroscience and refined through practice, we reveal great leadership by cultivating a relationship with the body and its nervous system.</p>
+        <p>How you lead and decide is shaped by how your system operates &mdash; especially under pressure.</p>
+        <p>We develop leadership by restoring alignment in the body and nervous system, allowing for clear perception and more precise decision-making.</p>
+        <p>This is one integrated, multilayered approach &mdash; working through multiple entry points.</p>
+
+        <div class="photo-grid-3">
+          <img src="images/retreat-38.jpg" alt="Inner reflection work at the ranch" />
+          <img src="images/retreat-66.png" alt="Equine facilitated session with a horse" />
+          <img src="images/retreat-77.png" alt="Outdoor gathering under a desert ramada" />
+        </div>
+
+        <div class="method-item">
+          <strong>Movement and Body Alignment</strong>
+          <p>Working with posture, coordination, and movement patterns to reorganize neuromuscular pathways and restore alignment between body and brain.</p>
+        </div>
+
+        <div class="method-item">
+          <strong>Equine Facilitated Learning</strong>
+          <p>Horses respond to what is real &mdash; not what is intended. They reflect incongruence in timing, presence, and boundaries instantly, making underlying patterns visible without interpretation.</p>
+        </div>
+
+        <div class="method-item">
+          <strong>Neuro-Kinesiology</strong>
+          <p>Using muscle biofeedback to identify neurological stress patterns and bring unconscious responses into awareness. From there, the system reorganizes.</p>
+        </div>
+
+        <div class="method-item">
+          <strong>Coaching and EMDR</strong>
+          <p>Individual one-on-one coaching designed for reflection and integration, supporting the processing of underlying patterns and translating insight into concrete decisions and action. Where relevant, EMDR is used to help shift deeply rooted patterns, allowing new perspectives and responses to emerge.</p>
+        </div>
+
+        <div class="method-item">
+          <strong>Whole Food Nutrition</strong>
+          <p>Meals are prepared with whole, seasonal ingredients chosen to support nervous system regulation and reflect the rhythm of the land. Nutrition here is not an accessory &mdash; it is part of the regulation itself.</p>
+        </div>
+
+        <div class="method-item">
+          <strong>Nature and Physiology</strong>
+          <p>The environment, the rhythm of the day, and the nourishment support regulation, recovery, and integration at a physiological level.</p>
+        </div>
+
+        <p>Together, this creates a shift:</p>
+
+        <div class="shift-block">
+          From thinking to sensing.<br>
+          From reacting to responding.<br>
+          From fragmentation to alignment.
+        </div>
+
+        <p>At the center lies what we call the Wheel of Congruence &mdash; where vision, emotion, body, and action come back into alignment.</p>
+        <p>You learn to read your body and emotions as information. Not something to push through, but something that informs direction.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Our Team -->
+  <div class="content">
+    <section>
+      <span class="kicker">Team</span>
+      <h2>Our Team</h2>
+      <img class="section-photo" src="images/retreat-118.png" alt="The Care Ranch team" />
+      <p>A multidisciplinary team working at the intersection of neuroscience, embodiment, nature, and leadership. Led by a core team and extended by leading experts in their fields &mdash; some contributing long-term, others joining for specific retreats &mdash; to deepen the integrated approach.</p>
+
+      <div class="bio">
+        <h3>Margreet Malenstein</h3>
+        <span class="role">Founder and Vision Holder, Lead Trainer</span>
+        <p>As former co-owner of Bergman Clinics, an international healthcare group, I combine firsthand executive experience with a deep focus on the body, the nervous system, and preventive care.</p>
+        <p>My work is grounded in a thorough understanding of human behavior and in how safety, alignment, and environment influence both healing and performance. Having navigated the pressures of executive leadership myself, I know what it means when the system is out of alignment &mdash; and what becomes possible when it is restored.</p>
+        <p>Through horses and neuro-kinesiology, I support leaders in recognizing where alignment is present and where it is not &mdash; and in restoring congruence from within.</p>
+        <p>The Care Ranch was born from a conviction that the principles we apply to leadership development should be accessible more broadly &mdash; which is why we also extend this work to young people through our non-profit branch.</p>
+      </div>
+
+      <div class="bio">
+        <h3>Scott Putman</h3>
+        <span class="role">Co-Creator, Method Architect and Lead Trainer</span>
+        <p>My work focuses on the relationship between movement, the nervous system, and perception.</p>
+        <p>With an international academic background (MFA, University of California), I developed EBAS &mdash; the Elemental Body Alignment System &mdash; as a way to work directly with the reorganization of neuromuscular pathways. Through movement, I support the body and brain in coming back into alignment, directly influencing how the nervous system regulates and how clarity is experienced.</p>
+        <p>The body reflects the internal state. Through movement and Equine Facilitated Learning, that state becomes visible &mdash; and adjustable through direct feedback.</p>
+        <p class="poetic">Alignment is not explained. It is experienced. From there, the system reorganizes.</p>
+      </div>
+
+      <div class="bio">
+        <h3>Lotte van Dam</h3>
+        <span class="role">Co-Creator, Method Architect and Lead Trainer</span>
+        <p>My work focuses on personal leadership in complexity.</p>
+        <p>With a background in Psychology and International Business Administration, and over 18 years of leadership experience across hospitality, design, and healthcare &mdash; including executive and board-level roles &mdash; I understand both the outer complexity of leadership and the inner landscape that shapes it.</p>
+        <p>Rooted in neuroscience, neuroplasticity, and systemic coaching, I work at the intersection of perception, behavior, and the nervous system, using the body as a source of information.</p>
+        <p>Through coaching, EMDR, and integration work, I support leaders in recognizing patterns, processing underlying responses, and restoring alignment between body, emotion, and action.</p>
+        <p>This is where clarity emerges, congruence becomes visible, and leadership becomes grounded &mdash; with impact that extends into teams, organizations, and systems.</p>
+      </div>
+    </section>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- The Experience (poetic — narrow) -->
+  <div class="content-narrow">
+    <section>
+      <span class="kicker">Experience</span>
+      <h2>The Experience</h2>
+      <img class="section-photo" src="images/location-51.jpg" alt="The pool at The Care Ranch with palm trees and mountain views" />
+      <p>The experience unfolds over six days &mdash; a rhythm of activation and integration. Structured, yet spacious.</p>
+      <p>Mornings begin in the body: movement, alignment, regulation. During the day, the work deepens &mdash; equine sessions, neuro-kinesiology, and coaching. Always alternating between experience, reflection, and integration.</p>
+      <p>Late afternoons create space for reflection and sauna house experiences. Evenings settle under a sky filled with stars.</p>
+      <p>Each participant arrives with their own question. Sometimes clear. Sometimes not yet fully formed.</p>
+      <p class="poetic">Private sessions create precision. The group &mdash; intentionally small &mdash; creates reflection and perspective.</p>
+    </section>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- The Journey -->
+  <div class="content">
+    <section>
+      <span class="kicker">Journey</span>
+      <h2>The Journey</h2>
+      <img class="section-photo" src="images/retreat-85.png" alt="Participants walking through the desert trees" />
+
+      <h3>Preparing for the Experience</h3>
+      <p>The journey begins before arrival. Each participant starts with an intake questionnaire and session, exploring context, key questions, and underlying patterns.</p>
+      <p>A preparation guide supports participants in:</p>
+      <ul class="soft-list">
+        <li>Clarifying intention</li>
+        <li>Increasing awareness</li>
+        <li>Slowing down before entering the program</li>
+      </ul>
+      <p>This ensures participants arrive focused and connected to what is ready to be explored.</p>
+
+      <h3>Six-Day Immersive Leadership Experience</h3>
+      <p>Participants enter an environment designed to regulate the nervous system. As the system settles:</p>
+      <ul class="soft-list">
+        <li>Perception sharpens</li>
+        <li>Internal noise reduces</li>
+        <li>Patterns become visible</li>
+      </ul>
+      <p>Through Equine Facilitated Learning, neuro-kinesiology, body alignment, coaching, and nature-based practices, insight is not only understood &mdash; it is experienced and embodied.</p>
+
+      <h3>Integration &mdash; Sustaining Change</h3>
+      <p>After the immersion, the process continues.</p>
+      <p>Participants are supported in translating insights into daily life and professional context through a structured integration phase, including follow-up sessions and integration guidance.</p>
+      <p>The focus is on:</p>
+      <ul class="soft-list">
+        <li>Stabilizing new patterns</li>
+        <li>Maintaining clarity under pressure</li>
+        <li>Embedding change over time</li>
+      </ul>
+      <p class="poetic emphasis">Because transformation is not defined by the experience itself &mdash; but by what remains.</p>
+    </section>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- What Leaders Gain -->
+  <div class="content">
+    <section>
+      <span class="kicker">Impact</span>
+      <h2>What Leaders Gain</h2>
+
+      <div class="benefit">
+        <strong>Clarity of purpose</strong>
+        <p>A reconnection with what truly matters &mdash; beyond pressure, expectation, or noise. Not driven by thought alone, but aligned with the whole system.</p>
+      </div>
+
+      <div class="benefit">
+        <strong>The ability to regulate under pressure</strong>
+        <p>Learning how to access calm, focus, and precision in high-stakes environments. Not by pushing harder, but by regulating the nervous system.</p>
+      </div>
+
+      <div class="benefit">
+        <strong>Embodied self-awareness</strong>
+        <p>Deep insight into patterns, roles, and behaviors &mdash; and how they show up in relation to others. Felt, not just understood.</p>
+      </div>
+
+      <div class="benefit">
+        <strong>Congruent leadership</strong>
+        <p>When what you think, feel, and do align, decisions become cleaner, communication more direct, and leadership more effective.</p>
+      </div>
+
+      <div class="benefit">
+        <strong>Sustainable change</strong>
+        <p>Through integration and one-on-one guidance, insights are translated into daily life and leadership practice. This is not a peak experience &mdash; it is a shift that holds.</p>
+      </div>
+
+      <div class="benefit">
+        <strong>Space to pause and reset</strong>
+        <p>A rare interruption of speed. A place where slowing down is not a luxury, but the condition for clarity.</p>
+      </div>
+
+      <div class="benefit">
+        <strong>A deeper connection to self and others</strong>
+        <p>Through nature, horses, and human interaction, leaders experience what it means to be fully present &mdash; and to lead from that place.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- Why This Matters for Organizations (full-bleed cream) -->
+  <div class="content">
+    <div class="full-bleed full-bleed-cream org-section">
+      <div class="full-bleed-inner">
+        <span class="kicker">Organizations</span>
+        <h2>Why This Matters for Organizations</h2>
+        <p>For HR leaders and organizations investing in senior talent, this experience supports what traditional leadership programs often cannot reach:</p>
+        <ul class="soft-list">
+          <li>Preventive leadership care &mdash; addressing patterns before they become burnout</li>
+          <li>Stronger leadership presence and trust within teams</li>
+          <li>Sustainable performance under complexity</li>
+          <li>A measurable shift in how leaders regulate, decide, and communicate</li>
+        </ul>
+        <p class="poetic emphasis">Leaders return more coherent &mdash; not merely rested.</p>
+        <p>The impact extends beyond the individual leader into teams, culture, and long-term organizational health.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- From Leadership to Contribution -->
+  <div class="content-narrow">
+    <section>
+      <span class="kicker">Mission</span>
+      <h2>From Leadership to Contribution</h2>
+      <p>The work at the heart of The Care Ranch &mdash; learning to regulate, to reconnect, and to find direction from within &mdash; is not only relevant for senior leaders. It is just as essential for young people who feel stuck, overwhelmed, or without direction.</p>
+      <p>The Care Ranch operates as a hybrid model. The for-profit leadership programs fund the non-profit branch, making this work accessible for young individuals who would otherwise not have access.</p>
+      <p>Through participation, you contribute to creating impact beyond the individual journey.</p>
+
+      <div class="mission-close">
+        <div class="dot-divider">
+          <span></span><i></i><span></span>
+        </div>
+        <p class="poetic">Because learning to regulate, to reconnect, and to find direction in yourself should be available earlier &mdash; not only when things break down.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- Practical Information (full-bleed white — informational) -->
+  <div class="content">
+    <div class="full-bleed full-bleed-white">
+      <div class="full-bleed-inner-wide">
+        <span class="kicker">Details</span>
+        <h2>Practical Information</h2>
+        <div class="info-grid">
+          <div class="info-item">
+            <strong>Location</strong>
+            <p>The Care Ranch &mdash; Tubac Ranch, Arizona, USA</p>
+          </div>
+          <div class="info-item">
+            <strong>Duration</strong>
+            <p>6 days / 5 nights</p>
+          </div>
+          <div class="info-item">
+            <strong>Group size</strong>
+            <p>8&ndash;12 participants</p>
+          </div>
+          <div class="info-item">
+            <strong>Includes</strong>
+            <ul class="soft-list">
+              <li>Full program and personal guidance</li>
+              <li>Private sessions (coaching, kinesiology, equine work)</li>
+              <li>Daily body alignment movement practice</li>
+              <li>Accommodation (private casitas)</li>
+              <li>Nourishing meals and non-alcoholic beverages</li>
+              <li>On-site facilities (swimming pools, sauna house experience)</li>
+              <li>Transfer to and from Tucson airport</li>
+            </ul>
+          </div>
+          <div class="info-item">
+            <strong>Not included</strong>
+            <p>Flights to Tucson airport</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Begin Your Journey -->
+  <div class="content-narrow">
+    <section>
+      <div class="pull-quote">
+        <p>A place where heritage is honored, simplicity restores the nervous system, and leadership returns to congruence.</p>
+      </div>
+
+      <div class="cta">
+        <h2>Begin Your Journey</h2>
+        <p>Program dates, pricing, and availability are listed on the website.</p>
+        <p>Participation is limited and based on application.</p>
+        <p style="margin-top: 24px;"><a href="https://www.thecareranch.com">Connect with us</a></p>
+        <p style="margin-top: 20px; font-size: 0.88em; color: rgba(61,54,50,0.5);">Where needed, we are happy to connect briefly to explore alignment and answer any questions.</p>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="footer-gradient"></div>
+    <p class="footer-meta">The Care Ranch &nbsp;&middot;&nbsp; Brochure v9 &nbsp;&middot;&nbsp; April 2026</p>
+  </footer>
+
+</body>
+</html>

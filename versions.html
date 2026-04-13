@@ -113,7 +113,58 @@
 
     .version-note {
       color: rgba(61, 54, 50, 0.78);
+      margin-bottom: 14px;
+    }
+
+    .version-changes {
+      margin: 0 0 16px;
+    }
+
+    .version-changes-label {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(61, 54, 50, 0.42);
       margin-bottom: 10px;
+    }
+
+    .version-changes ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .version-changes li {
+      position: relative;
+      padding-left: 16px;
+      font-size: 0.92em;
+      color: rgba(61, 54, 50, 0.72);
+      line-height: 1.55;
+      margin-bottom: 6px;
+    }
+
+    .version-changes li:last-child {
+      margin-bottom: 0;
+    }
+
+    .version-changes li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--terracotta);
+      opacity: 0.5;
+    }
+
+    .version-pending {
+      margin-top: 10px;
+      font-size: 0.88em;
+      font-style: italic;
+      color: rgba(61, 54, 50, 0.5);
     }
 
     .version-open {
@@ -172,12 +223,43 @@
 
     <div class="version-list">
 
+      <a class="version" href="brochure-v9.html">
+        <div class="version-header">
+          <span class="version-label">v9</span>
+          <span class="version-date">April 2026</span>
+        </div>
+        <p class="version-note">Content additions based on the client's "nervous system" vision note and competitor inspiration. Every change is additive &mdash; nothing from v8 was removed.</p>
+        <div class="version-changes">
+          <span class="version-changes-label">What changed</span>
+          <ul>
+            <li>Arizona section now positions The Care Ranch as an <strong>international network</strong> of retreat locations, with Arizona as flagship and Wageningen (Netherlands) as the next to open.</li>
+            <li><strong>Whole Food Nutrition</strong> added as a distinct pillar in the Method section, alongside Movement, Equine, Neuro-Kinesiology, Coaching and Nature.</li>
+            <li><strong>Empathetic opening line</strong> added to the Clean Vision section: "There comes a point in leadership where more thinking no longer produces more clarity&hellip;"</li>
+            <li><strong>Three outcome bullets</strong> added after Clean Vision: clarity from congruence, calm under pressure, leadership embodied.</li>
+            <li><strong>Our Team intro</strong> expanded to explicitly say that leading experts contribute &mdash; some long-term, others joining for specific retreats.</li>
+            <li>New line in <strong>Who This Is For</strong> noting that The Care Ranch also runs retreats for other audiences (including youth through the non-profit branch), with this brochure focused on senior leadership.</li>
+          </ul>
+        </div>
+        <p class="version-pending">Pending client input: (1) expert-card format (photo + bio) &mdash; awaiting clarification on "een foto en stukje"; (2) individual portraits in team bios &mdash; awaiting photos; (3) Tara-removal edit on the team group photo.</p>
+        <span class="version-open">Open v9</span>
+      </a>
+
       <a class="version" href="brochure-v8.html">
         <div class="version-header">
           <span class="version-label">v8</span>
           <span class="version-date">April 2026</span>
         </div>
-        <p class="version-note">Full rewrite of the brochure copy, with client-selected photos added across Arizona, Method, Team, Experience, and Journey sections.</p>
+        <p class="version-note">Full rewrite of the brochure based on feedback to v7, with client-selected photos added afterward.</p>
+        <div class="version-changes">
+          <span class="version-changes-label">What changed</span>
+          <ul>
+            <li>Restructured section order &mdash; Who This Is For and Our Team moved earlier in the reading flow.</li>
+            <li>Consistent voice and point of view throughout (v7 had mixed first/third person).</li>
+            <li>Dutch-to-English translation points fixed; Theory U reference removed; EBAS acronym moved into Scott's bio where it makes sense.</li>
+            <li>Non-profit section bridged in and stronger CTA added at the end.</li>
+            <li><strong>Eight client-selected photos</strong> added across Arizona, Method (3-column grid), Team, Experience and Journey sections.</li>
+          </ul>
+        </div>
         <span class="version-open">Open v8</span>
       </a>
 
