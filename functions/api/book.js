@@ -4,14 +4,10 @@ const ALLOWED_DATES = new Set([
   'October 28 – November 2, 2026',
 ]);
 
-const RECIPIENTS = ['willem@scex.nl'];
-const FROM = 'The Care Ranch <onboarding@resend.dev>';
+const PRIMARY_RECIPIENT = 'willem@scex.nl';
+const CC_RECIPIENTS = 'contact@thecareranch.com';
 
-export async function onRequestPost({ request, env }) {
-  if (!env.RESEND_API_KEY) {
-    return json({ ok: false, error: 'Server not configured' }, 500);
-  }
-
+export async function onRequestPost({ request }) {
   let body;
   try {
     body = await request.json();
@@ -31,35 +27,30 @@ export async function onRequestPost({ request, env }) {
     return json({ ok: false, error: 'Please select a valid date' }, 400);
   }
 
-  const subject = `Retreat booking request, ${date}`;
-  const text = [
-    'New retreat booking request:',
-    '',
-    `  Date:  ${date}`,
-    `  Name:  ${name}`,
-    `  Email: ${email}`,
-    '',
-    'Reply directly to this email to reach the guest.',
-  ].join('\n');
-
-  const resendResponse = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${env.RESEND_API_KEY}`,
-      'Content-Type': 'application/json',
+  const formSubmitResponse = await fetch(
+    `https://formsubmit.co/ajax/${encodeURIComponent(PRIMARY_RECIPIENT)}`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        _subject: `Retreat booking request, ${date}`,
+        _cc: CC_RECIPIENTS,
+        _replyto: email,
+        _template: 'table',
+        _captcha: 'false',
+        Date: date,
+        Name: name,
+        Email: email,
+      }),
     },
-    body: JSON.stringify({
-      from: FROM,
-      to: RECIPIENTS,
-      reply_to: email,
-      subject,
-      text,
-    }),
-  });
+  );
 
-  if (!resendResponse.ok) {
-    const detail = await resendResponse.text().catch(() => '');
-    console.error('Resend error', resendResponse.status, detail);
+  const result = await formSubmitResponse.json().catch(() => ({}));
+  if (!formSubmitResponse.ok || result.success !== 'true') {
+    console.error('FormSubmit error', formSubmitResponse.status, result);
     return json({ ok: false, error: 'Could not send email' }, 502);
   }
 
