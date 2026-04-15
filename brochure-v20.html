@@ -388,6 +388,34 @@
       border-radius: 2px;
     }
 
+    .experience-rooms {
+      max-width: 1100px;
+      margin: clamp(1rem, 2vw, 1.5rem) auto 0;
+    }
+    .experience-rooms > img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 2px;
+    }
+    .experience-rooms-pair {
+      display: flex;
+      gap: clamp(1rem, 2vw, 1.5rem);
+      margin-top: clamp(1rem, 2vw, 1.5rem);
+      align-items: flex-start;
+    }
+    .experience-rooms-pair img {
+      flex: 1;
+      min-width: 0;
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 2px;
+    }
+    @media (max-width: 720px) {
+      .experience-rooms-pair { flex-direction: column; }
+    }
+
     /* ═══════════════ Shift block (plain, no container) ═══════════════ */
     .shift-block {
       margin: clamp(2rem, 4vw, 2.75rem) auto;
@@ -2109,6 +2137,13 @@
       </div>
       <div class="experience-media">
         <img src="images/location-51.jpg" alt="The pool at The Care Ranch with palm trees and mountain views" />
+      </div>
+      <div class="experience-rooms">
+        <img src="images/rooms-bedroom.png" alt="A bedroom at The Care Ranch with wooden beams, a small fireplace, and warm afternoon light" />
+        <div class="experience-rooms-pair">
+          <img src="images/rooms-chair.png" alt="A vintage upholstered chair beside a floor lamp" />
+          <img src="images/rooms-window.png" alt="A stone guest house at night, a single window glowing with warm light" />
+        </div>
       </div>
     </div>
   </section>
