@@ -157,6 +157,6 @@ The original (Google Docs export) stores formatting as paragraph- and run-level 
 
 ## Pending (as of 2026-04-15)
 - **Web3Forms access key + swap** (primary blocker on reliable booking email delivery): user signs up at web3forms.com, receives `access_key`, pastes. Then store as Cloudflare Pages secret + rewrite the POST in `functions/api/book.js`. Full steps in "Booking form + email" section above.
-- **Team group photo edits** (`retreat-118.png`): user is editing in Freepik — removing Tara and obfuscating the face of the person lying down. Will drop the edited file back in place; brochure picks it up automatically, no code change.
+- **Session photo face obfuscation (still open)**: the person lying down in one of the outdoor session photos needs their face made less recognizable. User will do this in Freepik and drop the edited file in place under its existing filename; brochure picks it up automatically. (Tara removal from the team group photo `retreat-118.png` was done 2026-04-15.)
 - **Individual team portraits**: placeholder tiles gone in v20; real portraits still awaited from the client.
 - **Fonts — monitor, don't chase**: the header-wonkiness pass landed on 2026-04-15 (italic + lowercase + softer color; see Context/Header typography). Beyond that, don't propose typography changes proactively. If the client raises further font feedback, engage.
