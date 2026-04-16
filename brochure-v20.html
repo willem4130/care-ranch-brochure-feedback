@@ -35,7 +35,8 @@
       .js .benefits-grid > *,
       .js .journey-timeline > *,
       .js .info-grid > *,
-      .js .statement-list > * {
+      .js .statement-list > *,
+      .js .testimonials-stack > * {
         opacity: 0;
       }
       /* Word-split targets — hide before JS splits them */
@@ -841,6 +842,54 @@
     @media (max-width: 540px) {
       .info-rooms { flex-direction: column; align-items: center; }
       .info-rooms img { flex: 0 1 auto; width: auto; max-width: 100%; max-height: 240px; }
+    }
+
+    /* ═══════════════ Testimonials ═══════════════
+       Quote body uses a smaller TCR italic than the canonical pull-out size
+       (clamp 1.4–1.85rem) because testimonials are longer paragraphs with
+       attribution, not single poetic lines. Justified exception, documented
+       in CLAUDE.md. */
+    .testimonials-stack {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(3rem, 5.5vw, 4.5rem);
+    }
+
+    .testimonial {
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .testimonial-quote {
+      font-family: 'The Care Ranch', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+      color: rgba(61, 54, 50, 0.85);
+      line-height: 1.55;
+      margin-bottom: 1.5rem;
+    }
+
+    .testimonial-attribution {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .testimonial-name {
+      font-family: 'The Care Ranch', Georgia, serif;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--terracotta);
+    }
+
+    .testimonial-role {
+      font-family: Arial, sans-serif;
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
     }
 
     /* ═══════════════ CTA ═══════════════ */
@@ -2267,6 +2316,40 @@
     </div>
   </section>
 
+  <!-- ═══════════════ Testimonials ═══════════════ -->
+  <section class="section testimonials-section">
+    <div class="section-inner section-inner-narrow">
+      <div class="section-header">
+        <h2>In Their Own Words</h2>
+      </div>
+      <div class="testimonials-stack">
+        <blockquote class="testimonial">
+          <p class="testimonial-quote">The Care Ranch is a retreat for leaders to find themselves, learn the tools to stay true to themselves and then evolve to become better leaders. The location, instructors and the program offered an opportunity to self reflect and be open to new knowledge in a comprehensive mind and body regime.</p>
+          <footer class="testimonial-attribution">
+            <span class="testimonial-name">Sara</span>
+            <span class="testimonial-role">Ex-Wall Street Managing Director</span>
+          </footer>
+        </blockquote>
+
+        <blockquote class="testimonial">
+          <p class="testimonial-quote">This training came at exactly the right moment. I gained deeper insight into myself, my patterns, and the roles I take on, and how they relate to others. Within a carefully built program, held by expert and engaged coaches, space opened up for slowing down, awareness, and real change. What I take with me is not only insights, but also a sense of direction and movement that keeps working through my daily life.</p>
+          <footer class="testimonial-attribution">
+            <span class="testimonial-name">Nicoline Beersen</span>
+            <span class="testimonial-role">Director Quality and Information, Bergman Clinics</span>
+          </footer>
+        </blockquote>
+
+        <blockquote class="testimonial">
+          <p class="testimonial-quote">Forget other leadership courses. This retreat is unique. I knew I needed to hit the brakes and find my &ldquo;off&rdquo; switch again. On the plane to Arizona, with the pre-reading and provided playlist, I knew I was finally hitting the brakes. The Ranch was the perfect place to pause. What I loved was the combination of real, experience-based sessions and the 1:1 coaching that helped me integrate everything. I reconnected with my purpose, listening to my whole self, not just my head. The quality and attention to detail were top-notch. If you need a deep dive into your purpose to recharge your work and personal life, this is it.</p>
+          <footer class="testimonial-attribution">
+            <span class="testimonial-name">Maaike Vos</span>
+            <span class="testimonial-role">Senior Program Manager, Booking.com</span>
+          </footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══════════════ CTA ═══════════════ -->
   <section class="section cta-section">
     <div class="section-inner section-inner-narrow">
@@ -2425,7 +2508,7 @@
           '.section-header, .arizona-header, .method-footer, ' +
           '.cta-section .cta-quote, .cta-section h2, .cta-section .cta-button, .cta-section > .section-inner > .kicker, ' +
           '.method-grid > *, .method-photos > *, .team-grid > *, .benefits-grid > *, ' +
-          '.journey-timeline > *, .info-grid > *, .statement-list > *'
+          '.journey-timeline > *, .info-grid > *, .statement-list > *, .testimonials-stack > *'
         ).forEach((el) => { el.style.opacity = 1; });
         return;
       }
@@ -2475,6 +2558,7 @@
         { selector: '.journey-timeline', stagger: 0.18, start: fadeUpStart },
         { selector: '.info-grid', stagger: 0.08, start: fadeUpStartSmall },
         { selector: '.statement-list', stagger: 0.07, start: fadeUpStartSmall },
+        { selector: '.testimonials-stack', stagger: 0.18, start: fadeUpStart },
       ];
 
       staggerConfigs.forEach(({ selector, stagger, start }) => {
