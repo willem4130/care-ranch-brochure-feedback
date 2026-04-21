@@ -67,6 +67,17 @@ Branches are optional; use them for experimental work, but sharing with the clie
 - **Never filter, recolor, crop, or harmonize client photos.** Client's explicit rule. CSS `object-position` for display cropping is OK as a narrow exception when explicitly requested (used for `retreat-77` to show the ramada/ground). In v20 the selector is URL-based (`img[src*="retreat-77"]`) so the crop travels with the file regardless of DOM order.
 - **No em-dashes (`—` / `&mdash;`).** Client explicitly flagged them as "too AI". Use commas, colons, semicolons, or parentheses per context. This rule applies to all new copy and any edits — do not reintroduce them.
 
+## Mobile optimization policy
+
+The mobile view is a **presentation layer on the same content**, never a simplified variant. Hard rules:
+
+- **Never remove text or image content on mobile.** Every paragraph, bullet, photo, and pull-out visible on desktop must remain present in the HTML and reachable on mobile. Compactness is achieved via CSS (padding, image sizing, grid layout), not by deleting content.
+- **Never change desktop when optimizing mobile.** All mobile-only rules live inside `@media (max-width: ...)` queries. The desktop experience must render byte-identically to what shipped before the mobile pass.
+- **Never drop a section.** All sections on desktop must be present on mobile, in the same order and using the same structural framework. Compactness is achieved by tightening each section in place, not by hiding or removing any.
+- **Mobile-only alternative copy is allowed**, but only via CSS: both the desktop-long and mobile-short variants live in the HTML, each shown or hidden via a media query. The desktop (long) version must always stay in the HTML so it remains accessible at any viewport.
+- **Image display cropping on mobile** (via `object-fit: cover` / `object-position`) is sanctioned for compactness, consistent with the desktop `retreat-77` exception. The image file is never modified; only display is cropped, and only on mobile.
+- **Desktop is the authoritative, complete version.** Mobile is the compact presentation. When in doubt, desktop wins.
+
 ## Animations (v20 policy)
 - GSAP + ScrollTrigger via CDN (cdnjs, `defer`) drive: section fade-ups, staggered grid reveals, hero parallax, word-by-word reveal on h2s and `[data-split]` poetic lines.
 - **FOUC prevention** hides certain selectors at `opacity: 0` until GSAP animates them in. The gotcha: on slow connections, `window.load` waits for the GSAP CDN, so gated elements stay invisible for 2–3 seconds. That looked broken on the client's connection.
