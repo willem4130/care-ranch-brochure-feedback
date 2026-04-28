@@ -2089,7 +2089,7 @@
           <p data-split>The desert does not add anything. It removes.</p>
           <p>And in that space, vision becomes visible again.</p>
         </div>
-        <div class="split-media">
+        <div class="split-media" data-keep-visible="true">
           <div class="split-media-sticky">
             <img src="images/retreat-108.png" alt="A chef preparing food in the ranch kitchen" />
             <p class="image-caption">Whole seasonal ingredients, prepared with care.</p>
@@ -2150,7 +2150,7 @@
 
       <p class="method-intro">We reveal great leadership by cultivating a relationship with the body and its nervous system. How you lead and decide is shaped by how your system operates, especially under pressure.</p>
 
-      <div class="method-photos">
+      <div class="method-photos" data-keep-visible="true">
         <img src="images/retreat-77.png" alt="Lotte facilitating a session under the ramada" />
         <img src="images/retreat-38.jpg" alt="Scott — inner reflection work" />
         <img src="images/retreat-66.png" alt="Equine facilitated session with a horse" />
@@ -2211,7 +2211,7 @@
 
       <p class="team-intro">Led by a core team and extended by leading experts in their fields (some contributing long-term, others joining for specific retreats), to deepen the integrated approach.</p>
 
-      <div class="team-banner">
+      <div class="team-banner" data-keep-visible="true">
         <img src="images/retreat-118.png" alt="The Care Ranch team" />
       </div>
 
@@ -2256,7 +2256,7 @@
         <p>Mornings begin in the body: movement, alignment, regulation. During the day, the work deepens: equine sessions, neuro-kinesiology, and coaching. Always alternating between experience, reflection, and integration. Late afternoons create space for reflection and sauna house experiences. Evenings settle under a sky filled with stars.</p>
         <p>Each participant arrives with their own question, sometimes clear, sometimes not yet fully formed. Private sessions create precision. The group, intentionally small, creates reflection and perspective.</p>
       </div>
-      <div class="experience-media">
+      <div class="experience-media" data-keep-visible="true">
         <img src="images/location-51.jpg" alt="The pool at The Care Ranch with palm trees and mountain views" />
       </div>
     </div>
@@ -2270,7 +2270,7 @@
         <p class="poetic">The work begins before arrival and continues long after. A six-day immersion sits at the center, held on both sides by preparation and integration.</p>
       </div>
 
-      <div class="journey-banner">
+      <div class="journey-banner" data-keep-visible="true">
         <img src="images/retreat-85.png" alt="Participants walking through the desert trees" />
       </div>
 
@@ -2407,7 +2407,7 @@
           <strong>Price</strong>
           <p>USD 5,950 per person</p>
         </div>
-        <div class="info-rooms">
+        <div class="info-rooms" data-keep-visible="true">
           <img src="images/rooms-bedroom.png" alt="A bedroom at The Care Ranch with wooden beams, a small fireplace, and warm afternoon light" />
           <img src="images/rooms-chair.png" alt="A vintage upholstered chair beside a floor lamp" />
           <img src="images/rooms-window.png" alt="A stone guest house at night, a single window glowing with warm light" />
@@ -2488,12 +2488,12 @@
         </label>
         <fieldset class="booking-dates">
           <legend>Choose a date</legend>
-          <label class="booking-date">
-            <input type="radio" name="date" value="May 26 – 31, 2026" required>
-            <span>May 26 &ndash; 31, 2026</span>
+          <label class="booking-date booking-date-disabled">
+            <input type="radio" name="date" value="May 26 – 31, 2026" disabled>
+            <span>May 26 &ndash; 31, 2026 <em>(Fully booked)</em></span>
           </label>
           <label class="booking-date">
-            <input type="radio" name="date" value="September 16 – 21, 2026">
+            <input type="radio" name="date" value="September 16 – 21, 2026" required>
             <span>September 16 &ndash; 21, 2026</span>
           </label>
           <label class="booking-date booking-date-disabled">
@@ -2790,6 +2790,25 @@
         { sel: '.testimonials-section', anchor: ':scope > .section-inner > .section-header' }
       ];
 
+      // Photo containers are tagged data-keep-visible so the accordion
+      // skips them. If a sibling of the anchor contains a keep-visible
+      // descendant (e.g. .info-grid → .info-rooms), recurse and mark its
+      // text-only children instead, so text still collapses but the
+      // photo stays on screen. Returns true if anything was marked.
+      function markCollapsible(el) {
+        if (el.nodeType !== 1) return false;
+        if (el.hasAttribute('data-keep-visible')) return false;
+        if (el.querySelector('[data-keep-visible]')) {
+          var any = false;
+          for (var i = 0; i < el.children.length; i++) {
+            if (markCollapsible(el.children[i])) any = true;
+          }
+          return any;
+        }
+        el.classList.add('collapsible');
+        return true;
+      }
+
       function engage() {
         if (engaged) return;
         if (!mq.matches) return;
@@ -2807,8 +2826,7 @@
           while (node && node !== inner) {
             var sib = node.nextElementSibling;
             while (sib) {
-              sib.classList.add('collapsible');
-              collapsedAny = true;
+              if (markCollapsible(sib)) collapsedAny = true;
               sib = sib.nextElementSibling;
             }
             node = node.parentElement;
