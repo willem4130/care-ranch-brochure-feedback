@@ -182,6 +182,22 @@
       color: var(--charcoal-soft);
     }
 
+    /* Method/Team supporting paragraph that follows the TCR poetic
+       intro inside the section-header. Styled to match what a body
+       paragraph in .section-header looked like (centered, lighter
+       weight) since these were lifted out of the header on
+       2026-04-28 to make room for a TCR poetic line. Specificity
+       boosted via section-class so the global
+       `.section-inner > p { text-align: justify }` rule loses. */
+    .method-section .section-inner > .method-intro,
+    .team-section .section-inner > .team-intro {
+      text-align: center;
+      max-width: 740px;
+      margin: 0 auto clamp(2.5rem, 5vw, 3.5rem);
+      font-size: 1.08em;
+      color: var(--charcoal-soft);
+    }
+
     .section-divider {
       height: 1px;
       background: linear-gradient(to right, transparent, var(--border), transparent);
@@ -1293,6 +1309,22 @@
       .drop-cap::first-letter {
         font-size: 3.2em;
       }
+
+      /* Mobile bump for ALL TCR pull-outs.
+         TCR Regular's lowercase letterforms are flowing/cursive, harder
+         to read at the canonical 22px on small screens. Bumping to ~27px
+         meaningfully improves legibility. Applied uniformly so the
+         brochure stays consistent (per CLAUDE.md TCR-size rule). The
+         testimonial-quote sanctioned exception keeps its smaller size. */
+      .poetic,
+      .hero-tagline,
+      .inline-quote p,
+      .shift-block,
+      .statement-list li,
+      .cta-quote {
+        font-size: clamp(1.7rem, 5vw, 2rem);
+        line-height: 1.45;
+      }
     }
 
     @media (max-width: 520px) {
@@ -2085,8 +2117,10 @@
     <div class="section-inner">
       <div class="section-header">
         <h2>The Care Ranch Method</h2>
-        <p>Grounded in neuroscience and refined through practice, we reveal great leadership by cultivating a relationship with the body and its nervous system. How you lead and decide is shaped by how your system operates, especially under pressure.</p>
+        <p class="poetic">Grounded in neuroscience and refined through practice.</p>
       </div>
+
+      <p class="method-intro">We reveal great leadership by cultivating a relationship with the body and its nervous system. How you lead and decide is shaped by how your system operates, especially under pressure.</p>
 
       <div class="method-photos">
         <img src="images/retreat-77.png" alt="Lotte facilitating a session under the ramada" />
@@ -2144,8 +2178,10 @@
     <div class="section-inner">
       <div class="section-header">
         <h2>Our Team</h2>
-        <p>A multidisciplinary team working at the intersection of neuroscience, embodiment, nature, and leadership. Led by a core team and extended by leading experts in their fields (some contributing long-term, others joining for specific retreats), to deepen the integrated approach.</p>
+        <p class="poetic">A multidisciplinary team working at the intersection of neuroscience, embodiment, nature, and leadership.</p>
       </div>
+
+      <p class="team-intro">Led by a core team and extended by leading experts in their fields (some contributing long-term, others joining for specific retreats), to deepen the integrated approach.</p>
 
       <div class="team-banner">
         <img src="images/retreat-118.png" alt="The Care Ranch team" />
