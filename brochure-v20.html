@@ -137,6 +137,27 @@
       line-height: 1.5;
     }
 
+    /* TCR pull-outs render in the block/print letterform via uppercase
+       + letter-spacing, mirroring the header style. The font's lowercase
+       is a flowing cursive that's hard to read in long passages; the
+       uppercase letterforms (same file) are clearer. Applied uniformly
+       per the TCR-consistency rule in CLAUDE.md. The email link inside
+       .cta-fine is reset back to its natural case. */
+    .poetic,
+    .hero-tagline,
+    .inline-quote p,
+    .shift-block,
+    .statement-list li,
+    .cta-quote,
+    .cta-fine {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .cta-fine a {
+      text-transform: none;
+      letter-spacing: 0.02em;
+    }
+
     .emphasis { font-weight: 500; }
 
     /* .drop-cap removed in v20 — item #10 / user request */
@@ -946,23 +967,28 @@
       display: inline-block;
       font-family: 'The Care Ranch', Georgia, serif;
       font-style: italic;
-      font-size: 1rem;
-      letter-spacing: 0.12em;
+      font-size: 1.05rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--cream);
+      color: #fff;
       text-decoration: none;
-      background: transparent;
-      border: 1px solid rgba(242, 237, 228, 0.35);
-      padding: 16px 44px;
+      background: var(--terracotta);
+      border: 1px solid var(--terracotta);
+      padding: 18px 48px;
       margin-top: 2rem;
       cursor: pointer;
-      transition: all 0.3s ease;
+      box-shadow: 0 4px 16px rgba(196, 125, 92, 0.35);
+      transition: all 0.25s ease;
     }
 
-    .cta-button:hover {
-      background: var(--terracotta);
-      border-color: var(--terracotta);
+    .cta-button:hover,
+    .cta-button:focus-visible {
+      background: #b56b4b;
+      border-color: #b56b4b;
       color: #fff;
+      box-shadow: 0 6px 22px rgba(196, 125, 92, 0.5);
+      transform: translateY(-1px);
+      outline: none;
     }
 
     .cta-fine {
@@ -1311,19 +1337,21 @@
       }
 
       /* Mobile bump for ALL TCR pull-outs.
-         TCR Regular's lowercase letterforms are flowing/cursive, harder
-         to read at the canonical 22px on small screens. Bumping to ~27px
-         meaningfully improves legibility. Applied uniformly so the
-         brochure stays consistent (per CLAUDE.md TCR-size rule). The
+         TCR pull-outs render in the block/print uppercase letterform
+         (see the desktop rule that adds text-transform: uppercase +
+         letter-spacing). The block letters scan well at any size; this
+         bump just keeps the same readable presence on small screens.
+         Applied uniformly per CLAUDE.md TCR-size rule. The
          testimonial-quote sanctioned exception keeps its smaller size. */
       .poetic,
       .hero-tagline,
       .inline-quote p,
       .shift-block,
       .statement-list li,
-      .cta-quote {
-        font-size: clamp(1.7rem, 5vw, 2rem);
-        line-height: 1.45;
+      .cta-quote,
+      .cta-fine {
+        font-size: clamp(1.5rem, 4.5vw, 1.85rem);
+        line-height: 1.4;
       }
     }
 
