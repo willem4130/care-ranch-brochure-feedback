@@ -2694,13 +2694,22 @@
   <!-- ═══════════════ Mobile-only accordion (Tier 3) ═══════════════
        Wraps long sections behind a "Read more" toggle on viewports
        ≤767px so the brochure scans as ~3-4 screens instead of ~24.
-       The function early-returns on desktop, so DOM mutation only
-       happens on mobile. See "Mobile optimization policy" in CLAUDE.md
-       for why this MUST stay viewport-guarded. -->
+
+       Engagement strategy: setup is idempotent and runs (a) at load
+       if the viewport is already mobile, AND (b) on the FIRST
+       transition to a mobile viewport via matchMedia.change (so
+       DevTools mobile mode works without reload, and so a phone
+       held landscape→portrait engages on rotation).
+
+       Once engaged, the DOM stays modified even if the viewport
+       grows past 768px — but the desktop CSS makes the injected
+       button + .collapsible classes visually inert at desktop widths.
+       Net effect at desktop on a fresh load: zero DOM changes. See
+       "Mobile optimization policy" in CLAUDE.md. -->
   <script>
     (function setupMobileAccordion() {
+      var engaged = false;
       var mq = window.matchMedia('(max-width: 767px)');
-      if (!mq.matches) return;
 
       var configs = [
         { sel: '.arizona-section',     anchor: ':scope > .section-inner > .arizona-narrative' },
@@ -2717,53 +2726,63 @@
         { sel: '.testimonials-section', anchor: ':scope > .section-inner > .section-header' }
       ];
 
-      configs.forEach(function(cfg) {
-        var section = document.querySelector(cfg.sel);
-        if (!section) return;
-        var anchor = section.querySelector(cfg.anchor);
-        if (!anchor) return;
+      function engage() {
+        if (engaged) return;
+        if (!mq.matches) return;
+        engaged = true;
 
-        // Mark every following sibling of the anchor (and its ancestors up to
-        // section-inner's children) as collapsible. This handles cases where
-        // the anchor sits inside a wrapper like .experience-content or
-        // .org-content — we collapse later siblings inside the wrapper AND
-        // later siblings of the wrapper itself.
-        var collapsedAny = false;
-        var node = anchor;
-        var inner = section.querySelector(':scope > .section-inner');
-        while (node && node !== inner) {
-          var sib = node.nextElementSibling;
-          while (sib) {
-            sib.classList.add('collapsible');
-            collapsedAny = true;
-            sib = sib.nextElementSibling;
+        configs.forEach(function(cfg) {
+          var section = document.querySelector(cfg.sel);
+          if (!section) return;
+          var anchor = section.querySelector(cfg.anchor);
+          if (!anchor) return;
+
+          var collapsedAny = false;
+          var node = anchor;
+          var inner = section.querySelector(':scope > .section-inner');
+          while (node && node !== inner) {
+            var sib = node.nextElementSibling;
+            while (sib) {
+              sib.classList.add('collapsible');
+              collapsedAny = true;
+              sib = sib.nextElementSibling;
+            }
+            node = node.parentElement;
           }
-          node = node.parentElement;
-        }
-        if (!collapsedAny) return;
+          if (!collapsedAny) return;
 
-        section.classList.add('has-accordion');
+          section.classList.add('has-accordion');
 
-        // Insert button immediately after the anchor element.
-        var btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'section-toggle';
-        btn.setAttribute('aria-expanded', 'false');
-        btn.textContent = 'Read more';
-        anchor.insertAdjacentElement('afterend', btn);
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'section-toggle';
+          btn.setAttribute('aria-expanded', 'false');
+          btn.textContent = 'Read more';
+          anchor.insertAdjacentElement('afterend', btn);
 
-        btn.addEventListener('click', function() {
-          var expanded = btn.getAttribute('aria-expanded') === 'true';
-          btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-          btn.textContent = expanded ? 'Read more' : 'Read less';
-          section.classList.toggle('expanded', !expanded);
-          // Refresh GSAP triggers if available so reveals on newly-shown
-          // content compute correct positions.
-          if (window.ScrollTrigger && typeof window.ScrollTrigger.refresh === 'function') {
-            window.ScrollTrigger.refresh();
-          }
+          btn.addEventListener('click', function() {
+            var expanded = btn.getAttribute('aria-expanded') === 'true';
+            btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+            btn.textContent = expanded ? 'Read more' : 'Read less';
+            section.classList.toggle('expanded', !expanded);
+            if (window.ScrollTrigger && typeof window.ScrollTrigger.refresh === 'function') {
+              window.ScrollTrigger.refresh();
+            }
+          });
         });
-      });
+      }
+
+      // Try at load (mobile viewport hits the matches branch).
+      engage();
+
+      // Try again whenever the viewport crosses the breakpoint so DevTools
+      // device emulation, phone rotation, and window resizing all work
+      // without a page reload. Older Safari only supports addListener.
+      if (typeof mq.addEventListener === 'function') {
+        mq.addEventListener('change', engage);
+      } else if (typeof mq.addListener === 'function') {
+        mq.addListener(engage);
+      }
     })();
   </script>
 
