@@ -1384,6 +1384,44 @@
       fill: currentColor;
     }
 
+    /* ═══════════════ Mobile-only accordion (Tier 3) ═══════════════
+       Strict mobile-only feature. Both `.section-toggle` and `.collapsible`
+       have NO effect at desktop widths (toggle button is hidden, collapsible
+       elements render at their default block flow). The JS that adds these
+       classes also early-returns on desktop, so on a fresh desktop load the
+       DOM is byte-identical to no-accordion. The CSS below is the safety net
+       for the resize-mobile-then-grow case. */
+    .section-toggle { display: none; }
+
+    @media (max-width: 767px) {
+      .section.has-accordion .collapsible { display: none; }
+      .section.has-accordion.expanded .collapsible { display: block; }
+
+      .section-toggle {
+        display: block;
+        margin: 1.5rem auto 0;
+        padding: 0.55rem 1.4rem;
+        background: transparent;
+        border: 1px solid var(--terracotta);
+        color: var(--terracotta);
+        font-family: 'The Care Ranch', cursive;
+        font-style: italic;
+        text-transform: uppercase;
+        font-size: 0.78rem;
+        letter-spacing: 0.14em;
+        cursor: pointer;
+        border-radius: 2px;
+        line-height: 1.2;
+        transition: background-color 0.2s ease, color 0.2s ease;
+      }
+      .section-toggle:hover,
+      .section-toggle:focus-visible {
+        background: var(--terracotta);
+        color: #fff;
+        outline: none;
+      }
+    }
+
     /* ═══════════════ Print stylesheet ═══════════════ */
     @media print {
       @page { margin: 1.5cm; size: A4; }
@@ -2656,6 +2694,82 @@
         );
       });
     });
+  </script>
+
+  <!-- ═══════════════ Mobile-only accordion (Tier 3) ═══════════════
+       Wraps long sections behind a "Read more" toggle on viewports
+       ≤767px so the brochure scans as ~3-4 screens instead of ~24.
+       The function early-returns on desktop, so DOM mutation only
+       happens on mobile. See "Mobile optimization policy" in CLAUDE.md
+       for why this MUST stay viewport-guarded. -->
+  <script>
+    (function setupMobileAccordion() {
+      var mq = window.matchMedia('(max-width: 767px)');
+      if (!mq.matches) return;
+
+      var configs = [
+        { sel: '.arizona-section',     anchor: ':scope > .section-inner > .arizona-narrative' },
+        { sel: '.clean-vision-section', anchor: ':scope > .section-inner > .section-header' },
+        { sel: '.who-section',         anchor: ':scope > .section-inner > .section-header' },
+        { sel: '.method-section',      anchor: ':scope > .section-inner > .section-header' },
+        { sel: '.team-section',        anchor: ':scope > .section-inner > .section-header' },
+        { sel: '.experience-section',  anchor: ':scope > .section-inner > .experience-content > .poetic' },
+        { sel: '.journey-section',     anchor: ':scope > .section-inner > .section-header' },
+        { sel: '.benefits-section',    anchor: ':scope > .section-inner > .section-header' },
+        { sel: '.org-section',         anchor: ':scope > .section-inner > .org-content > h2' },
+        { sel: '.mission-section',     anchor: ':scope > .section-inner > .section-header' },
+        { sel: '.practical-section',   anchor: ':scope > .section-inner > .section-header' },
+        { sel: '.testimonials-section', anchor: ':scope > .section-inner > .section-header' }
+      ];
+
+      configs.forEach(function(cfg) {
+        var section = document.querySelector(cfg.sel);
+        if (!section) return;
+        var anchor = section.querySelector(cfg.anchor);
+        if (!anchor) return;
+
+        // Mark every following sibling of the anchor (and its ancestors up to
+        // section-inner's children) as collapsible. This handles cases where
+        // the anchor sits inside a wrapper like .experience-content or
+        // .org-content — we collapse later siblings inside the wrapper AND
+        // later siblings of the wrapper itself.
+        var collapsedAny = false;
+        var node = anchor;
+        var inner = section.querySelector(':scope > .section-inner');
+        while (node && node !== inner) {
+          var sib = node.nextElementSibling;
+          while (sib) {
+            sib.classList.add('collapsible');
+            collapsedAny = true;
+            sib = sib.nextElementSibling;
+          }
+          node = node.parentElement;
+        }
+        if (!collapsedAny) return;
+
+        section.classList.add('has-accordion');
+
+        // Insert button immediately after the anchor element.
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'section-toggle';
+        btn.setAttribute('aria-expanded', 'false');
+        btn.textContent = 'Read more';
+        anchor.insertAdjacentElement('afterend', btn);
+
+        btn.addEventListener('click', function() {
+          var expanded = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+          btn.textContent = expanded ? 'Read more' : 'Read less';
+          section.classList.toggle('expanded', !expanded);
+          // Refresh GSAP triggers if available so reveals on newly-shown
+          // content compute correct positions.
+          if (window.ScrollTrigger && typeof window.ScrollTrigger.refresh === 'function') {
+            window.ScrollTrigger.refresh();
+          }
+        });
+      });
+    })();
   </script>
 
 </body>

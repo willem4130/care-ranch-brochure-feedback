@@ -69,14 +69,20 @@ Branches are optional; use them for experimental work, but sharing with the clie
 
 ## Mobile optimization policy
 
+> **🛑 ABSOLUTE RULE: NEVER CHANGE ANYTHING ON THE DESKTOP VERSION.** When working on mobile, the desktop render MUST be byte-identical to what shipped before the mobile pass. This rule has been emphasized by the client multiple times and is the single most important constraint of every mobile change. Verify before every commit.
+
 The mobile view is a **presentation layer on the same content**, never a simplified variant. Hard rules:
 
 - **Never remove text or image content on mobile.** Every paragraph, bullet, photo, and pull-out visible on desktop must remain present in the HTML and reachable on mobile. Compactness is achieved via CSS (padding, image sizing, grid layout), not by deleting content.
 - **Never change desktop when optimizing mobile.** All mobile-only rules live inside `@media (max-width: ...)` queries. The desktop experience must render byte-identically to what shipped before the mobile pass.
+- **JS counts as desktop change too.** Any JavaScript that mutates the DOM (wrapping elements, adding/removing classes, injecting buttons, attaching listeners that affect layout) MUST early-return on desktop via `window.matchMedia('(max-width: 767px)').matches` (or equivalent viewport check) BEFORE doing anything. Hiding the injected output via CSS `@media` is not enough — the DOM mutation itself can shift desktop layout, animations, or focus order. Guard the mutation, not just the styles.
+- **Resize handling.** If a mobile-only DOM mutation runs at load, decide explicitly what happens when the user resizes from mobile→desktop (e.g. DevTools, rotate, fold). Either: (a) listen for `matchMedia.onchange` and unwrap, or (b) leave the wrap in place but ensure CSS at desktop widths makes it visually identical to no-wrap. Document which one.
 - **Never drop a section.** All sections on desktop must be present on mobile, in the same order and using the same structural framework. Compactness is achieved by tightening each section in place, not by hiding or removing any.
 - **Mobile-only alternative copy is allowed**, but only via CSS: both the desktop-long and mobile-short variants live in the HTML, each shown or hidden via a media query. The desktop (long) version must always stay in the HTML so it remains accessible at any viewport.
 - **Image display cropping on mobile** (via `object-fit: cover` / `object-position`) is sanctioned for compactness, consistent with the desktop `retreat-77` exception. The image file is never modified; only display is cropped, and only on mobile.
 - **Desktop is the authoritative, complete version.** Mobile is the compact presentation. When in doubt, desktop wins.
+
+**Verification before every mobile commit:** open the page at desktop width (≥1024px) and confirm the rendered DOM and visual output are byte-identical to `main`. A `git diff` of just CSS/JS is not enough — actually compare the rendered desktop view.
 
 ## Animations (v20 policy)
 - GSAP + ScrollTrigger via CDN (cdnjs, `defer`) drive: section fade-ups, staggered grid reveals, hero parallax, word-by-word reveal on h2s and `[data-split]` poetic lines.

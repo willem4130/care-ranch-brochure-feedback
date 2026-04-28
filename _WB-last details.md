@@ -18,6 +18,6 @@ NB:
     A: guan luca vragen voor de hoofdletter fonts
 
 Mail:
--> ook voorwaarden naar margreet@thecareranch.com
--> zorg dat ALLE mails aankomen!
-    -> confirmation to sender (thanks for...)
+-> x-> nog wel bevestigen ook voorwaarden naar margreet@thecareranch.com
+x zorg dat ALLE mails aankomen!
+    x confirmation to sender (thanks for...)
